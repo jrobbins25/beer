@@ -2,42 +2,32 @@
 
 namespace AppBundle\Controller;
 
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
+use AppBundle\Entity\Beer;
+use FOS\RestBundle\Controller\FOSRestController;
+use FOS\RestBundle\Controller\Annotations as Rest;
 
-class TestController extends Controller
+class TestController extends FOSRestController
 {
    /**
-    * @Route("test", name="testAction")
+    * @Rest\Get(path="/beer/{id}", name="get_beer")
     */
-    public function testAction(Request $request)
+    public function getBeerAction(Beer $id)
     {
-        $class= new\stdClass;
-        $class->city = 'Sidney';
-        $class->location = 'australia';
-        $class->sport = 'surfing';
-
-        $response = new JsonResponse;
-        $response->setData($class);
-
-        return $response;
+        return $id;
     }
 
-    /**
-     * @Route("best", name="bestAction")
-     */
-    public function bestAction(Request $request)
+    public function postBeerAction()
     {
-        $data= new \stdClass;
-        $data->product_number = '22';
-        $data->product_qty = '200';
-        $data->product_percentage = '89%';
 
-        $response = new JsonResponse;
-        $response->setData($data);
+    }
 
-        return $response;    
+    public function putBeerAction()
+    {
+
+    }
+
+    public function deleteBeerAction()
+    {
+
     }
 }
