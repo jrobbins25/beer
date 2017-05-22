@@ -25,7 +25,8 @@ class Beer
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=50, nullable=false)
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Maker")
+     * @ORM\JoinColumn(name="maker", referencedColumnName="id")
      */
     private $maker;
 
@@ -33,10 +34,11 @@ class Beer
      * @ORM\Column(type="integer", nullable=true)
      */
     private $caloriesPerServing;
-
+    
+    
     /**
-     * Get id
      *
+     * Get id
      * @return integer
      */
     public function getId()
@@ -69,30 +71,6 @@ class Beer
     }
 
     /**
-     * Set maker
-     *
-     * @param string $maker
-     *
-     * @return Beer
-     */
-    public function setMaker($maker)
-    {
-        $this->maker = $maker;
-
-        return $this;
-    }
-
-    /**
-     * Get maker
-     *
-     * @return string
-     */
-    public function getMaker()
-    {
-        return $this->maker;
-    }
-
-    /**
      * Set caloriesPerServing
      *
      * @param integer $caloriesPerServing
@@ -114,5 +92,29 @@ class Beer
     public function getCaloriesPerServing()
     {
         return $this->caloriesPerServing;
+    }
+
+    /**
+     * Set maker
+     *
+     * @param \AppBundle\Entity\Maker $maker
+     *
+     * @return Beer
+     */
+    public function setMaker(\AppBundle\Entity\Maker $maker = null)
+    {
+        $this->maker = $maker;
+
+        return $this;
+    }
+
+    /**
+     * Get maker
+     *
+     * @return \AppBundle\Entity\Maker
+     */
+    public function getMaker()
+    {
+        return $this->maker;
     }
 }
