@@ -29,16 +29,23 @@ class Beer
      * @ORM\JoinColumn(name="maker", referencedColumnName="id")
      */
     private $maker;
+    
+    /**
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Type")
+     * @ORM\JoinColumn(name="type", referencedColumnName="id")
+     */
+    private $type;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
     private $caloriesPerServing;
-    
-    
+
+
     /**
-     *
      * Get id
+     *
      * @return integer
      */
     public function getId()
@@ -116,5 +123,29 @@ class Beer
     public function getMaker()
     {
         return $this->maker;
+    }
+
+    /**
+     * Set type
+     *
+     * @param \AppBundle\Entity\Type $type
+     *
+     * @return Beer
+     */
+    public function setType(\AppBundle\Entity\Type $type = null)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return \AppBundle\Entity\Type
+     */
+    public function getType()
+    {
+        return $this->type;
     }
 }

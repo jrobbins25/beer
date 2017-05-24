@@ -18,10 +18,31 @@ class TestController extends FOSRestController
   
         return $id;
     }
-
-    public function postBeerAction()
+    
+    /**
+     * Put Action
+     * @var Request $request
+     * @var integar $id ID of entity
+     * return View|array
+     */
+    public function postBeerAction(Request $request, $id)
     {
-
+        $entity = $this->getEntity($id);
+        $form = $this->createForm(new \AppBundle\Entity\Country(), $entity, array('method' => 'Put'));
+        $form->bind($request);
+        
+        if ($form->isValid())
+            {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($entity);
+            $em->flush();
+            return $this->view(null, codes::HTTP_NO_CONTENT);
+                
+        }
+        
+        return array(
+            'form' => $form,
+        );
     }
 
     public function putBeerAction()

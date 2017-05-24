@@ -34,6 +34,14 @@ class Maker
      */
     private $country;
     
+    /**
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Type")
+     * @ORM\JoinColumn(name="type", referencedColumnName="id")
+     */
+    private $type;
+    
+    
    
     /**
      * Constructor
@@ -133,5 +141,29 @@ class Maker
     public function getCountry()
     {
         return $this->country;
+    }
+
+    /**
+     * Set type
+     *
+     * @param \AppBundle\Entity\Type $type
+     *
+     * @return Maker
+     */
+    public function setType(\AppBundle\Entity\Type $type = null)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return \AppBundle\Entity\Type
+     */
+    public function getType()
+    {
+        return $this->type;
     }
 }

@@ -1,13 +1,13 @@
 <?php
 
-namespace AppBundle\Entity;
+Namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity()
  */
-class Country
+Class Type
 {
     /**
      * @ORM\Column(type="integer")
@@ -17,18 +17,17 @@ class Country
     private $id;
     
     /**
-    * @ORM\Column(type="string", length=50, nullable=false)
-    */
-    private $name;
-  
-    /**
-     *@ORM\Column(type="string", length=50, nullable=false)
+     * @ORM\Column(type="string", length=50, nullable=false) 
      */
-    private $continent;
-  
+    private $name;
+    
     /**
-     *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Maker", mappedBy="country")
+     * @ORM\Column(type="string", length=50, nullable=false)
+     */
+    private $region;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Beer", mappedBy="type")
      */
     private $makers;
     /**
@@ -54,7 +53,7 @@ class Country
      *
      * @param string $name
      *
-     * @return country
+     * @return Type
      */
     public function setName($name)
     {
@@ -74,37 +73,37 @@ class Country
     }
 
     /**
-     * Set continent
+     * Set region
      *
-     * @param string $continent
+     * @param string $region
      *
-     * @return country
+     * @return Type
      */
-    public function setContinent($continent)
+    public function setRegion($region)
     {
-        $this->continent = $continent;
+        $this->region = $region;
 
         return $this;
     }
 
     /**
-     * Get continent
+     * Get region
      *
      * @return string
      */
-    public function getContinent()
+    public function getRegion()
     {
-        return $this->continent;
+        return $this->region;
     }
 
     /**
      * Add maker
      *
-     * @param \AppBundle\Entity\Maker $maker
+     * @param \AppBundle\Entity\Beer $maker
      *
-     * @return country
+     * @return Type
      */
-    public function addMaker(\AppBundle\Entity\Maker $maker)
+    public function addMaker(\AppBundle\Entity\Beer $maker)
     {
         $this->makers[] = $maker;
 
@@ -114,9 +113,9 @@ class Country
     /**
      * Remove maker
      *
-     * @param \AppBundle\Entity\Maker $maker
+     * @param \AppBundle\Entity\Beer $maker
      */
-    public function removeMaker(\AppBundle\Entity\Maker $maker)
+    public function removeMaker(\AppBundle\Entity\Beer $maker)
     {
         $this->makers->removeElement($maker);
     }
