@@ -3,9 +3,13 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Beer;
+use AppBundle\Entity\Maker;
+use AppBundle\Entity\Type;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
-use Doctrine\ORM\Mapping as ORM;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Validator\ConstraintViolationListInterface;
 
 class TestController extends FOSRestController
 
@@ -15,34 +19,32 @@ class TestController extends FOSRestController
     */
     public function getBeerAction(Beer $id)
     {
-  
         return $id;
     }
-    
+
     /**
-     * Put Action
-     * @var Request $request
-     * @var integar $id ID of entity
-     * return View|array
+     * @Rest\Post(path="/beer", name="post_beer")
+     *
+     * @ParamConverter(
+     *     "beer",
+     *     converter="fos_rest.request_body"
+     * )
      */
-    public function postBeerAction(Request $request, $id)
+    public function postBeerAction(Beer $beer, ConstraintViolationListInterface $violations)
     {
-        $entity = $this->getEntity($id);
-        $form = $this->createForm(new \AppBundle\Entity\Country(), $entity, array('method' => 'Put'));
-        $form->bind($request);
-        
-        if ($form->isValid())
-            {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($entity);
-            $em->flush();
-            return $this->view(null, codes::HTTP_NO_CONTENT);
-                
+        if (count($violations)) {
+            return $violations;
         }
-        
-        return array(
-            'form' => $form,
-        );
+
+        $em = $this->getDoctrine()->getManager();
+
+        $beer->setMaker($em->getRepository(Maker::class)->find($beer->getMaker()->getId()));
+        $beer->setType($em->getRepository(Type::class)->find($beer->getType()->getId()));
+
+        $em->persist($beer);
+        $em->flush();
+
+        return $this->view($beer, Response::HTTP_CREATED);
     }
 
     public function putBeerAction()

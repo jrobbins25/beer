@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Class Beer
@@ -16,17 +17,26 @@ class Beer
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Assert\Blank(
+     *     message="You are a blithering idiot"
+     * )
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=false)
+     * @Assert\NotBlank()
+     * @Assert\Length(
+     *     max="50"
+     * )
      */
     private $name;
 
     /**
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Maker")
      * @ORM\JoinColumn(name="maker", referencedColumnName="id")
+     * @Assert\NotBlank()
+     * @Assert\Valid()
      */
     private $maker;
     
@@ -34,11 +44,17 @@ class Beer
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Type")
      * @ORM\JoinColumn(name="type", referencedColumnName="id")
+     * @Assert\NotBlank()
+     * @Assert\Valid()
      */
     private $type;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\NotNull()
+     * @Assert\Type(
+     *     type="integer"
+     * )
      */
     private $caloriesPerServing;
 
