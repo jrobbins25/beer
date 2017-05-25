@@ -14,7 +14,9 @@ Class Type
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(
+     *      message="You have failed!!"
+     * )
      */
     private $id;
     
@@ -22,6 +24,8 @@ Class Type
      * @ORM\Column(type="string", length=50, nullable=false) 
      */
     private $name;
+    
+    // ...
     
     /**
      * @ORM\Column(type="string", length=50, nullable=false)

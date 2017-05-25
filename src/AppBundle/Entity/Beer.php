@@ -18,7 +18,7 @@ class Beer
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * @Assert\Blank(
-     *     message="You are a blithering idiot"
+     *     message="You have failed!!"
      * )
      */
     private $id;
@@ -28,6 +28,10 @@ class Beer
      * @Assert\NotBlank()
      * @Assert\Length(
      *     max="50"
+     * )
+     *  @Assert\Choice(
+     *      choices = { "pale_ale", "lager", "stout", "cafe_ale", "farmhouse_saison", "dubbel_ale", "pale_lager", "blonde_ale"},
+     *      message = "Choose a valid type."
      * )
      */
     private $name;
