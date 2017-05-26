@@ -30,7 +30,7 @@ class Beer
      *     max="50"
      * )
      *  @Assert\Choice(
-     *      choices = { "pale_ale", "lager", "stout", "cafe_ale", "farmhouse_saison", "dubbel_ale", "pale_lager", "blonde_ale"},
+     *      choices = { "guinness", "blue_moon", "samuel_adams", "heineken", "budweiser", "fat_tire", "newcastle", "pabst"},
      *      message = "Choose a valid type."
      * )
      */
