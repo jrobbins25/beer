@@ -55,16 +55,8 @@ class TestController extends FOSRestController
             return $violations;
         }    
 
-        $em = $this->getDoctrine()->getManager();
-    
-        $id->setName($beer->getName());
-        $id->setMaker($em->getRepository(Maker::class)->find($beer->getMaker()->getId()));
-        $id->setType($em->getRepository(Type::class)->find($beer->getType()->getId()));
-        $id->setCaloriesPerServing($beer->getCaloriesPerServing());
-                
-        $em->persist($id);
-        $em->flush();
-    
+        $beer = $this->get('beer_service')->updateBeer($beer);
+        
         return $this->view($id, Response::HTTP_OK);
     }
 

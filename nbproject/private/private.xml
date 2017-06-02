@@ -7,6 +7,8 @@
             <file>file:/C:/MAMP/htdocs/beer/src/AppBundle/Entity/Maker.php</file>
             <file>file:/C:/MAMP/htdocs/beer/src/AppBundle/Entity/Country.php</file>
             <file>file:/C:/MAMP/htdocs/beer/src/AppBundle/Entity/Beer.php</file>
+            <file>file:/C:/MAMP/htdocs/beer/src/AppBundle/Services/BeerService.php</file>
+            <file>file:/C:/MAMP/htdocs/beer/src/AppBundle/Controller/TestControllerB.php</file>
             <file>file:/C:/MAMP/htdocs/beer/src/AppBundle/Entity/Type.php</file>
         </group>
     </open-files>

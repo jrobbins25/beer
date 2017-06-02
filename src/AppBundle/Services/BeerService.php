@@ -30,9 +30,15 @@ class BeerService
         return $beer;
     }
 
-    public function updateBeer()
+    public function updateBeer(Beer $id, Beer $name)
     {
-
+        $id->setName($name->getName());
+        $id->setMaker($this->em->getRepository(Maker::class)->find($name->getMaker()->getId()));
+        $id->setType($this->em->getRepository(Type::class)->find($name->getType()->getId()));
+        $id->setCaloriesPerServing($name->getCaloriesPerServing());
+                
+        $this->em->persist($id);
+        $this->em->flush();
     }
 
     public function deleteBeer()
